@@ -1,0 +1,95 @@
+package Scoop;
+use strict;
+
+sub ajax_main {
+	my $S = shift;
+	my $tool = $S->cgi->param('tool');
+	my $t = $S->{AJAX_TOOLS}->{$tool};
+	if(!$t){
+		$S->ajax_failure(501);
+		return;
+		}
+	# if we're here, we run this.
+	if($t->{is_box}) {
+		$S->run_box($t->{func});
+		}
+	else {
+		my $func = $t->{func};
+		$S->$func();
+		}
+	# for completeness
+	return;
+	}
+
+# return apache headers indicating success
+sub ajax_success {
+	my $S = shift;
+	$S->apache->status(200);
+	# fucking mother goatse fucking dumbass javascript bullshit
+	# requiring a goddamn document, not just the error code.
+	#my $ack = $S->{UI}->{VARS}->{site_url} . "/" .
+        #  $S->{UI}->{VARS}->{rootdir} . "scripts/ack.html";
+	#$S->apache->headers_out->{'Location'} = $ack;
+	#$S->{HEADER_ONLY}=1;
+	# try doing everything here, see if it works
+	my $ack = $S->{UI}->{BLOCKS}->{ack_page};
+	$S->apache->content_type('text/html; charset='.($S->{UI}->{VARS}->{charset} || 'ISO-8859-1'));
+	$S->apache->headers_out->{'Content-Length'} = length($ack);
+	$S->apache->send_http_header unless $Scoop::MP2; # we'll have to keep mod_perl2 stuff in
+				      # mind for the future
+	$S->apache->print($ack);
+	$S->apache->rflush();
+	$S->{NO_PAGE_OUT} = 1;
+	return;
+	}
+
+# return apache headers indicating failure
+sub ajax_failure {
+        my $S = shift;
+	my $code = shift || 400;
+        $S->apache->status($code);
+        $S->{HEADER_ONLY}=1;
+        return;
+	}
+
+sub ajax_error_msg {
+	my $S = shift;
+	my $err = shift;
+	my $code = shift || 200;
+	my $errpage = $S->{UI}->{BLOCKS}->{ajax_error_page};
+	$errpage =~ s/__ERR__/$err/;
+        $S->apache->content_type('text/html; charset='.($S->{UI}->{VARS}->{charset} || 'ISO-8859-1'));
+        $S->apache->headers_out->{'Content-Length'} = length($errpage);
+        $S->apache->send_http_header unless $Scoop::MP2; # we'll have to keep mod_perl2 stuff in
+                                      # mind for the future
+        $S->apache->print($errpage);
+        $S->apache->rflush();
+
+
+	}
+
+sub ajax_trl_ret {
+        my $S = shift;
+	my $out = shift;
+        $S->apache->status(200);
+        # try doing everything here, see if it works
+        my $ack = $S->{UI}->{BLOCKS}->{trl_ack_page};
+	# hey, sweet
+	my $trlnum = sprintf("%d", $S->trl_chk($S->{UID}));
+	$ack =~ s/__TRL__/$trlnum/;
+	my $outrate = ($out) ? qq|<p class="error" id="noTrollRatingsLeft">Rating failed: you have no troll ratings left.</p>| : '';
+	$ack =~ s/__RL__/$outrate/;
+	
+        $S->apache->content_type('text/html; charset='.($S->{UI}->{VARS}->{charset} || 'ISO-8859-1'));
+        $S->apache->headers_out->{'Content-Length'} = length($ack);
+        $S->apache->send_http_header unless $Scoop::MP2; # we'll have to keep mod_perl2 stuff in
+                                      # mind for the future
+        $S->apache->print($ack);
+        $S->apache->rflush();
+        $S->{NO_PAGE_OUT} = 1;
+        return;
+        }
+
+
+
+1;

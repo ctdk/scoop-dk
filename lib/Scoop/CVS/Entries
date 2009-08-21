@@ -1,0 +1,40 @@
+D/Admin////
+D/Ads////
+D/Apache////
+D/Billing////
+D/Comments////
+D/HTML////
+D/Polls////
+D/Stories////
+/Ads.pm/1.35/Thu Aug  5 15:30:47 2004//
+/ApacheHandler.pm/1.76/Thu Aug  5 15:30:47 2004//
+/Billing.pm/1.15/Thu Aug  5 15:30:47 2004//
+/Boxes.pm/1.173/Thu Aug  5 15:30:47 2004//
+/CGI.pm/1.8/Thu Aug  5 15:30:47 2004//
+/Debug.pm/1.4/Thu Aug  5 15:30:06 2004//
+/RDF.pm/1.11/Thu Aug  5 15:30:06 2004//
+/Spellchecker.pm/1.10/Thu Aug  5 15:30:48 2004//
+/Statement.pm/1.2/Thu Aug  5 15:30:06 2004//
+/Static.pm/1.9/Thu Aug  5 15:30:06 2004//
+/Subscription.pm/1.20/Thu Aug  5 15:30:48 2004//
+/Users.pm/1.1/Wed Aug  4 21:49:48 2004//
+D/Compat1x////
+D/IPC////
+D/Users////
+/Admin.pm/1.17/Mon Oct 10 05:27:53 2005//
+/Cache.pm/1.8/Mon Oct 10 05:27:53 2005//
+/Calendar.pm/1.2/Tue Jan 25 15:22:20 2005//
+/Comments.pm/1.132/Result of merge//
+/Cookies.pm/1.13/Mon Oct 10 05:27:54 2005//
+/Cron.pm/1.29/Mon Oct 10 05:27:54 2005//
+/DB.pm/1.27/Result of merge+Mon Oct 10 05:27:55 2005//
+/Hotlist.pm/1.16/Mon Oct 10 05:27:55 2005//
+/Interface.pm/1.58/Mon Oct 10 05:27:55 2005//
+/Macros.pm/1.4/Mon Oct 10 05:27:55 2005//
+/Polls.pm/1.67/Result of merge//
+/Search.pm/1.74/Result of merge+Mon Oct 10 05:27:55 2005//
+/Session.pm/1.2/Thu Sep 22 17:51:29 2005//
+/Stories.pm/1.49/Result of merge+Mon Oct 10 05:27:56 2005//
+/Tags.pm/1.1/Sat Sep 10 01:13:45 2005//
+/Utility.pm/1.35/Result of merge//
+D/Calendar////
